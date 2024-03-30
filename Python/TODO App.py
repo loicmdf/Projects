@@ -1,11 +1,13 @@
+# Simple ToDo CLI Application in Python
+# Author: S.Sunhaloo
+# Date: 30/03/2024
+
 # DECLARE ARRAY tasks: STRING
 # Array which will hold the tasks
 tasks = []
 
 # FUNCTION text
 # Will display main message / welcome screen to user
-
-
 def text():
     # Display Welcome Screen and Options
     print()
@@ -18,13 +20,12 @@ def text():
     print("Display Task(s): 1")
     print("Add Task(s): 2")
     print("Delete Task(s): 3")
+    print("Modify Task: 4")
     print()
 
 
 # FUNCTION display_tasks
 # Will be reponsible for displaying tasks
-
-
 def display_tasks():
     print()
 
@@ -42,8 +43,6 @@ def display_tasks():
 
 # FUNCTION add_tasks
 # Will allow the user to enter task(s) into array
-
-
 def add_tasks():
     # Exception Handling
     try:
@@ -88,6 +87,9 @@ def delete_tasks():
         # Iterate
         for y in range(num_of_delete):
             # Ask the user to enter index of task
+
+            print()
+
             delete_index = int(input("Please Enter Index ( # ) of Task: "))
 
             # Condition to satisfy to continue
@@ -97,6 +99,12 @@ def delete_tasks():
 
                 # Output what has been deleted
                 print(f"--->Task #{delete_index} Has Been Deleted<---")
+
+                # Displaying Array
+                    # Else we could have an error in terms of size of array
+                    # The simplest solution to this is to output the array to user each time
+                # Call Function `display_tasks`
+                display_tasks()
 
                 # No Need to Iterate to Find Index
                 # Iterate through array `tasks` to find index
@@ -113,7 +121,7 @@ def delete_tasks():
                 # The index entered does not exists
                 print()
                 print(
-                    f"Invalid Number Entered / {delete_index} Has Not Been Found")
+                    f"Invalid Number Entered / #{delete_index} Has Not Been Found")
                 print()
 
     except ValueError:
@@ -121,11 +129,37 @@ def delete_tasks():
         print("Please Enter Required Information")
         print()
 
+# FUNCTION modify
+# Will allow user to modify a task in array `tasks`
+def modify():
+
+    # DECLARE array_index: INTEGER
+    array_index = len(tasks) - 1
+
+    print()
+
+    # DECLARE modify_index: INTEGER
+    modify_index = int(input("Please Enter Index to Modify: "))
+
+    print()
+
+    for z in range(len(tasks)):
+
+        if z == modify_index:
+
+            # Ask the user to enter new value
+            new_value = input("Please Enter New Value: ")
+
+            # Change the value in array at that location
+            tasks[z] = new_value
+
+        else: 
+
+            print(f"Invalid Numbers Entered / #{modify_index} Has Not Been Found")
+            print()
 
 # FUNCTION main
 # Will be the one to "hold" everything
-
-
 def main():
     # Call Function `text`
     text()
@@ -147,25 +181,29 @@ def main():
             case 3:
                 # Call Function `delete_tasks`
                 delete_tasks()
+            case 4:
+                # Call Function `modify`
+                modify()
+
 
         print()
 
         # DECLARE see_task: STRING
         # Ask the user if he wants to review task list again
-        see_task = input("Do You Want to See Your Tasks Again ( yes / no )? ")
+        see_task = input("Do You Want to See Your Tasks Again [Y/n]? ")
 
         # Condition
-        if see_task == "yes":
+        if see_task == "y":
             # Call Function `display_tasks` again
             display_tasks()
 
             print()
 
             # Ask the user if wants to exits program
-            exits = input("Do You Want To Exit Program ( yes / no )?: ")
+            exits = input("Do You Want To Exit Program [Y/n]?: ")
 
             # Condition
-            if exits == "yes":
+            if exits == "y":
                 # Calls the `exit()` Function
                 exit()
 
@@ -176,10 +214,10 @@ def main():
         else:
             # DECLARE exits: STRING
             # Ask the user if he wants to exits program
-            exits = input("Do You Want To Exit Program ( yes / no )?: ")
+            exits = input("Do You Want To Exit Program [Y/n]?: ")
 
             # Condition
-            if exits == "yes":
+            if exits == "y":
                 # Calls the `exit()` Function
                 exit()
 
